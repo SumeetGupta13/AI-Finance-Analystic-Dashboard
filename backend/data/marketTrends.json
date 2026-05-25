@@ -1,0 +1,25 @@
+{
+  "indices": [
+    { "symbol": "NIFTY50", "name": "Nifty 50", "price": 23874.35, "change": 138.2, "changePercent": 0.58 },
+    { "symbol": "SENSEX", "name": "BSE Sensex", "price": 78425.1, "change": 412.6, "changePercent": 0.53 },
+    { "symbol": "BANKNIFTY", "name": "Nifty Bank", "price": 52618.25, "change": 486.9, "changePercent": 0.93 },
+    { "symbol": "NASDAQ", "name": "Nasdaq Composite", "price": 19678.44, "change": 71.3, "changePercent": 0.36 },
+    { "symbol": "SPX", "name": "S&P 500", "price": 5928.15, "change": -8.4, "changePercent": -0.14 }
+  ],
+  "trending": ["NVDA", "ICICIBANK", "BTC", "RELIANCE", "PARAG_FLEXI"],
+  "topGainers": ["NVDA", "ICICIBANK", "XRP", "HDFCBANK", "INFY"],
+  "topLosers": ["SOL", "TCS", "MSFT"],
+  "sectorPerformance": [
+    { "sector": "Financial Services", "changePercent": 1.42 },
+    { "sector": "Energy", "changePercent": 0.74 },
+    { "sector": "Information Technology", "changePercent": 0.18 },
+    { "sector": "Technology", "changePercent": 0.52 },
+    { "sector": "Crypto", "changePercent": 0.54 },
+    { "sector": "Mutual Funds", "changePercent": 0.28 }
+  ],
+  "marketMood": {
+    "score": 72,
+    "label": "Risk-on",
+    "summary": "Breadth remains constructive with banks, semiconductors, and diversified funds leading flows."
+  }
+}

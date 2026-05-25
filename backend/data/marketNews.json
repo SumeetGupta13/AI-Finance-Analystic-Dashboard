@@ -1,0 +1,52 @@
+[
+  {
+    "id": "news_20260525_001",
+    "title": "Nifty extends gains as banks and energy names lead institutional buying",
+    "source": "Financial Express Markets",
+    "summary": "Large private banks and energy majors drew strong delivery-based buying as investors rotated toward earnings visibility.",
+    "publishedAt": "2026-05-25T02:45:00.000Z",
+    "category": "Markets",
+    "sentiment": "positive",
+    "symbols": ["HDFCBANK", "ICICIBANK", "RELIANCE"]
+  },
+  {
+    "id": "news_20260525_002",
+    "title": "US technology megacaps trade mixed ahead of semiconductor guidance",
+    "source": "Global Market Desk",
+    "summary": "NVIDIA continued to outperform while software leaders consolidated near record levels before fresh enterprise spending commentary.",
+    "publishedAt": "2026-05-25T03:10:00.000Z",
+    "category": "US Stocks",
+    "sentiment": "neutral",
+    "symbols": ["NVDA", "MSFT", "AAPL"]
+  },
+  {
+    "id": "news_20260525_003",
+    "title": "Bitcoin holds above 109000 dollars as ETF flows remain steady",
+    "source": "Digital Asset Brief",
+    "summary": "Digital asset desks reported balanced spot demand and moderate derivatives positioning after the latest weekly ETF flow update.",
+    "publishedAt": "2026-05-25T03:25:00.000Z",
+    "category": "Crypto",
+    "sentiment": "positive",
+    "symbols": ["BTC", "ETH"]
+  },
+  {
+    "id": "news_20260525_004",
+    "title": "Hybrid mutual funds see resilient SIP inflows during volatile sessions",
+    "source": "Funds India Monitor",
+    "summary": "Balanced advantage and flexi-cap schemes attracted new monthly allocations as investors favored smoother return profiles.",
+    "publishedAt": "2026-05-24T13:30:00.000Z",
+    "category": "Funds",
+    "sentiment": "positive",
+    "symbols": ["HDFC_BAL_ADV", "PARAG_FLEXI"]
+  },
+  {
+    "id": "news_20260525_005",
+    "title": "Rupee steadies as crude basket cools and foreign inflows improve",
+    "source": "Macro Ledger",
+    "summary": "Currency desks tracked improving foreign portfolio flows and softer crude prices, supporting sentiment in import-sensitive sectors.",
+    "publishedAt": "2026-05-24T11:00:00.000Z",
+    "category": "Macro",
+    "sentiment": "neutral",
+    "symbols": ["RELIANCE", "HDFCBANK"]
+  }
+]

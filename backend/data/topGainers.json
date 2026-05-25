@@ -1,0 +1,26 @@
+[
+  {
+    "symbol": "ADANIPORTS",
+    "name": "Adani Ports & SEZ Ltd.",
+    "exchange": "NSE",
+    "price": 795.75,
+    "change": 14.9,
+    "changePercent": 1.91
+  },
+  {
+    "symbol": "TATACONSUM",
+    "name": "Tata Consumer Products Ltd.",
+    "exchange": "NSE",
+    "price": 815.35,
+    "change": 9.1,
+    "changePercent": 1.13
+  },
+  {
+    "symbol": "HDFCBANK",
+    "name": "HDFC Bank Ltd.",
+    "exchange": "NSE",
+    "price": 1712.4,
+    "change": 21.8,
+    "changePercent": 1.29
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "symbol": "INFY",
+    "name": "Infosys Ltd.",
+    "exchange": "NSE",
+    "price": 1388.2,
+    "change": -17.5,
+    "changePercent": -1.24
+  },
+  {
+    "symbol": "ICICIBANK",
+    "name": "ICICI Bank Ltd.",
+    "exchange": "NSE",
+    "price": 940.8,
+    "change": -10.7,
+    "changePercent": -1.12
+  },
+  {
+    "symbol": "M&M",
+    "name": "Mahindra & Mahindra Ltd.",
+    "exchange": "NSE",
+    "price": 1825.0,
+    "change": -22.5,
+    "changePercent": -1.22
+  }
+]

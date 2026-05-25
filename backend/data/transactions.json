@@ -1,0 +1,58 @@
+[
+  {
+    "id": "txn_mock_001",
+    "type": "buy",
+    "assetType": "stock",
+    "symbol": "HDFCBANK",
+    "name": "HDFC Bank Ltd.",
+    "quantity": 12,
+    "price": 1684.2,
+    "grossAmount": 20210.4,
+    "charges": 20.21,
+    "netAmount": 20230.61,
+    "status": "completed",
+    "createdAt": "2026-05-10T05:12:00.000Z"
+  },
+  {
+    "id": "txn_mock_002",
+    "type": "buy",
+    "assetType": "stock",
+    "symbol": "RELIANCE",
+    "name": "Reliance Industries Ltd.",
+    "quantity": 6,
+    "price": 2862.35,
+    "grossAmount": 17174.1,
+    "charges": 17.17,
+    "netAmount": 17191.27,
+    "status": "completed",
+    "createdAt": "2026-05-14T04:44:00.000Z"
+  },
+  {
+    "id": "txn_mock_003",
+    "type": "buy",
+    "assetType": "crypto",
+    "symbol": "BTC",
+    "name": "Bitcoin",
+    "quantity": 0.015,
+    "price": 106420,
+    "grossAmount": 1596.3,
+    "charges": 1.6,
+    "netAmount": 1597.9,
+    "status": "completed",
+    "createdAt": "2026-05-18T10:20:00.000Z"
+  },
+  {
+    "id": "txn_mock_004",
+    "type": "sell",
+    "assetType": "stock",
+    "symbol": "INFY",
+    "name": "Infosys Ltd.",
+    "quantity": 4,
+    "price": 1502.6,
+    "grossAmount": 6010.4,
+    "charges": 6.01,
+    "netAmount": 6004.39,
+    "status": "completed",
+    "createdAt": "2026-05-21T08:35:00.000Z"
+  }
+]

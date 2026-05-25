@@ -1,0 +1,34 @@
+{
+  "summary": {
+    "portfolioValue": 126842.74,
+    "cashBalance": 58412.03,
+    "investedValue": 65210.18,
+    "dayPnL": 1048.62,
+    "dayPnLPercent": 0.83,
+    "totalPnL": 3220.53,
+    "totalPnLPercent": 5.08,
+    "riskScore": 47
+  },
+  "allocation": [
+    { "label": "Indian Equities", "value": 57.8, "amount": 37701.44 },
+    { "label": "US Equities", "value": 21.4, "amount": 13955.42 },
+    { "label": "Crypto", "value": 12.9, "amount": 8412.7 },
+    { "label": "Mutual Funds", "value": 7.9, "amount": 5150.62 }
+  ],
+  "holdings": [
+    { "assetType": "stock", "symbol": "HDFCBANK", "name": "HDFC Bank Ltd.", "quantity": 12, "averagePrice": 1684.2, "lastPrice": 1748.3 },
+    { "assetType": "stock", "symbol": "RELIANCE", "name": "Reliance Industries Ltd.", "quantity": 6, "averagePrice": 2862.35, "lastPrice": 2924.65 },
+    { "assetType": "stock", "symbol": "NVDA", "name": "NVIDIA Corp.", "quantity": 10, "averagePrice": 126.4, "lastPrice": 136.42 },
+    { "assetType": "crypto", "symbol": "BTC", "name": "Bitcoin", "quantity": 0.015, "averagePrice": 106420, "lastPrice": 109450.2 },
+    { "assetType": "mutual_fund", "symbol": "PARAG_FLEXI", "name": "Parag Parikh Flexi Cap Fund Direct Growth", "quantity": 58.2, "averagePrice": 84.96, "lastPrice": 86.47 }
+  ],
+  "performance": [
+    { "date": "2026-05-17", "value": 121940.2 },
+    { "date": "2026-05-18", "value": 122880.7 },
+    { "date": "2026-05-19", "value": 123642.4 },
+    { "date": "2026-05-20", "value": 124510.9 },
+    { "date": "2026-05-21", "value": 125390.6 },
+    { "date": "2026-05-22", "value": 125794.12 },
+    { "date": "2026-05-25", "value": 126842.74 }
+  ]
+}

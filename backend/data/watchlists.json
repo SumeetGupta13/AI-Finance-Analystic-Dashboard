@@ -1,0 +1,21 @@
+[
+  {
+    "id": "watch_mock_001",
+    "name": "Core Opportunities",
+    "items": [
+      { "assetType": "stock", "symbol": "RELIANCE", "name": "Reliance Industries Ltd.", "exchange": "NSE" },
+      { "assetType": "stock", "symbol": "HDFCBANK", "name": "HDFC Bank Ltd.", "exchange": "NSE" },
+      { "assetType": "stock", "symbol": "NVDA", "name": "NVIDIA Corp.", "exchange": "NASDAQ" },
+      { "assetType": "crypto", "symbol": "BTC", "name": "Bitcoin", "exchange": "Global" }
+    ]
+  },
+  {
+    "id": "watch_mock_002",
+    "name": "Long-Term Funds",
+    "items": [
+      { "assetType": "mutual_fund", "symbol": "PARAG_FLEXI", "name": "Parag Parikh Flexi Cap Fund Direct Growth", "exchange": "AMFI" },
+      { "assetType": "mutual_fund", "symbol": "MIRAE_LARGE_MID", "name": "Mirae Asset Large & Midcap Fund Direct Growth", "exchange": "AMFI" },
+      { "assetType": "mutual_fund", "symbol": "ICICI_NIFTY50", "name": "ICICI Prudential Nifty 50 Index Fund Direct Growth", "exchange": "AMFI" }
+    ]
+  }
+]
