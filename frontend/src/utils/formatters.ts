@@ -1,3 +1,7 @@
+import type { AssetType } from '../types/domain';
+
+export const getAssetCurrency = (assetType?: AssetType | 'cash') => (assetType === 'crypto' ? 'USD' : 'INR');
+
 export const formatCurrency = (value: number, currency = 'INR') =>
   new Intl.NumberFormat(currency === 'INR' ? 'en-IN' : 'en-US', {
     style: 'currency',

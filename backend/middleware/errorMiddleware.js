@@ -33,9 +33,9 @@ const normalizeMongooseError = (err) => {
 
 const errorHandler = (err, req, res, next) => {
   const mongooseError = normalizeMongooseError(err);
-  const statusCode = mongooseError?.statusCode || (res.statusCode !== 200 ? res.statusCode : 500);
+  const statusCode = mongooseError?.statusCode || err.statusCode || (res.statusCode !== 200 ? res.statusCode : 500);
   const message = mongooseError?.message || err.message || 'Internal server error';
-  const errors = mongooseError?.errors || [];
+  const errors = mongooseError?.errors || err.errors || [];
 
   if (process.env.NODE_ENV !== 'test') {
     console.error(`[${req.method}] ${req.originalUrl} -> ${statusCode}: ${message}`);

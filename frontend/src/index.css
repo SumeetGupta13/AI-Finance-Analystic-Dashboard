@@ -2,10 +2,10 @@
 @import "./styles/index.css";
 
 @theme {
-  --color-finora-black: #0A0A0A;
-  --color-finora-panel: #111111;
-  --color-finora-indigo: #6366F1;
-  --color-finora-emerald: #34D399;
+  --color-stockiq-black: #0A0A0A;
+  --color-stockiq-panel: #111111;
+  --color-stockiq-indigo: #6366F1;
+  --color-stockiq-emerald: #34D399;
 }
 
 @layer base {
@@ -20,7 +20,8 @@
 }
 
 @layer utilities {
-  .glass {
+  .glass,
+  .glass-card {
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(18px);

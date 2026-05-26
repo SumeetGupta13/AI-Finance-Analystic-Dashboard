@@ -1,73 +1,44 @@
-const Portfolio = require('../models/Portfolio');
 const Holding = require('../models/Holding');
 const marketService = require('../services/marketService');
+const portfolioService = require('../services/portfolioService');
 const asyncHandler = require('../utils/asyncHandler');
 const { sendSuccess } = require('../utils/apiResponse');
-const { calculateHoldingMetrics } = require('../utils/finance');
-
-const ensurePortfolio = async (userId) => {
-  let portfolio = await Portfolio.findOne({ user: userId });
-
-  if (!portfolio) {
-    portfolio = await Portfolio.create({ user: userId });
-  }
-
-  return portfolio;
-};
 
 const getPortfolio = asyncHandler(async (req, res) => {
-  const portfolio = await ensurePortfolio(req.user._id);
-  const holdings = await Holding.find({ user: req.user._id, portfolio: portfolio._id }).sort({ updatedAt: -1 });
-  const enrichedHoldings = holdings.map((holding) => ({
-    ...holding.toObject(),
-    metrics: calculateHoldingMetrics(holding),
-  }));
-
-  return sendSuccess(res, 200, 'Portfolio loaded successfully', {
-    portfolio,
-    holdings: enrichedHoldings,
-  });
+  const data = await portfolioService.getPortfolio(req.user._id);
+  return sendSuccess(res, 200, 'Portfolio loaded successfully', data);
 });
 
 const getPortfolioAnalytics = asyncHandler(async (req, res) => {
-  const portfolio = await ensurePortfolio(req.user._id);
-  const holdings = await Holding.find({ user: req.user._id, portfolio: portfolio._id });
-  const metrics = holdings.map(calculateHoldingMetrics);
-  const investedValue = metrics.reduce((sum, item) => sum + item.invested, 0);
-  const currentValue = metrics.reduce((sum, item) => sum + item.currentValue, 0);
-  const totalPnL = currentValue - investedValue;
+  const data = await portfolioService.buildAnalytics(req.user._id);
+  return sendSuccess(res, 200, 'Portfolio analytics loaded successfully', data);
+});
 
-  const allocationMap = holdings.reduce((acc, holding, index) => {
-    const key = holding.assetType;
-    acc[key] = (acc[key] || 0) + metrics[index].currentValue;
-    return acc;
-  }, {});
+const buy = asyncHandler(async (req, res) => {
+  const data = await portfolioService.buyAsset(req.user._id, req.body);
+  const message = data.status === 'rejected' ? 'Buy order rejected' : 'Buy order completed';
+  return sendSuccess(res, data.status === 'rejected' ? 200 : 201, message, data);
+});
 
-  const allocation = Object.entries(allocationMap).map(([label, value]) => ({
-    label,
-    amount: Number(value.toFixed(2)),
-    value: currentValue > 0 ? Number(((value / currentValue) * 100).toFixed(2)) : 0,
-  }));
+const sell = asyncHandler(async (req, res) => {
+  const data = await portfolioService.sellAsset(req.user._id, req.body);
+  const message = data.status === 'rejected' ? 'Sell order rejected' : 'Sell order completed';
+  return sendSuccess(res, data.status === 'rejected' ? 200 : 201, message, data);
+});
 
-  return sendSuccess(res, 200, 'Portfolio analytics loaded successfully', {
-    summary: {
-      cashBalance: portfolio.cashBalance,
-      investedValue: Number(investedValue.toFixed(2)),
-      portfolioValue: Number((portfolio.cashBalance + currentValue).toFixed(2)),
-      currentValue: Number(currentValue.toFixed(2)),
-      totalPnL: Number(totalPnL.toFixed(2)),
-      totalPnLPercent: investedValue > 0 ? Number(((totalPnL / investedValue) * 100).toFixed(2)) : 0,
-      realizedPnL: portfolio.realizedPnL,
-      riskScore: portfolio.riskScore,
-    },
-    allocation,
-    holdings: holdings.map((holding, index) => ({ ...holding.toObject(), metrics: metrics[index] })),
-  });
+const getPortfolioTransactions = asyncHandler(async (req, res) => {
+  const transactions = await portfolioService.getPortfolioTransactions(req.user._id);
+  return sendSuccess(res, 200, 'Portfolio transactions loaded successfully', transactions, { count: transactions.length });
+});
+
+const getProfitLoss = asyncHandler(async (req, res) => {
+  const data = await portfolioService.getProfitLoss(req.user._id);
+  return sendSuccess(res, 200, 'Portfolio profit and loss loaded successfully', data);
 });
 
 const addHolding = asyncHandler(async (req, res) => {
   const { symbol, assetType, quantity } = req.body;
-  const portfolio = await ensurePortfolio(req.user._id);
+  const portfolio = await portfolioService.ensurePortfolio(req.user._id);
   const asset = await marketService.getAssetBySymbol(symbol);
 
   if (!asset || asset.assetType !== assetType) {
@@ -77,13 +48,12 @@ const addHolding = asyncHandler(async (req, res) => {
 
   const existing = await Holding.findOne({ user: req.user._id, symbol: asset.symbol, assetType });
   const price = asset.price || asset.nav;
-
   let holding;
 
   if (existing) {
     const totalQuantity = existing.quantity + quantity;
     const totalCost = existing.quantity * existing.averagePrice + quantity * price;
-    existing.quantity = totalQuantity;
+    existing.quantity = Number(totalQuantity.toFixed(6));
     existing.averagePrice = Number((totalCost / totalQuantity).toFixed(4));
     existing.lastPriceSnapshot = price;
     holding = await existing.save();
@@ -135,4 +105,14 @@ const removeHolding = asyncHandler(async (req, res) => {
   return sendSuccess(res, 200, 'Holding removed successfully', holding);
 });
 
-module.exports = { getPortfolio, getPortfolioAnalytics, addHolding, updateHolding, removeHolding, ensurePortfolio };
+module.exports = {
+  getPortfolio,
+  getPortfolioAnalytics,
+  buy,
+  sell,
+  getPortfolioTransactions,
+  getProfitLoss,
+  addHolding,
+  updateHolding,
+  removeHolding,
+};

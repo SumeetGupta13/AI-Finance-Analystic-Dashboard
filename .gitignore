@@ -2,6 +2,7 @@ node_modules/
 dist/
 .env
 .env.local
+backend/data/devUsers.json
 .DS_Store
 coverage/
 test-results/

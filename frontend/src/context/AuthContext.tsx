@@ -14,15 +14,25 @@ type AuthContextValue = {
 };
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
+const authTokenKey = 'stockiq_token';
+
+const getStoredToken = () => localStorage.getItem(authTokenKey);
+
+const setStoredToken = (token: string) => {
+  localStorage.setItem(authTokenKey, token);
+};
+
+const clearStoredToken = () => {
+  localStorage.removeItem(authTokenKey);
+};
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
   const refreshProfile = useCallback(async () => {
-    const token = localStorage.getItem('finora_token');
-
-    if (!token) {
+    if (!getStoredToken()) {
+      setUser(null);
       setLoading(false);
       return;
     }
@@ -31,7 +41,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const profile = await authService.profile();
       setUser(profile);
     } catch {
-      localStorage.removeItem('finora_token');
+      clearStoredToken();
       setUser(null);
     } finally {
       setLoading(false);
@@ -42,23 +52,34 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     void refreshProfile();
   }, [refreshProfile]);
 
+  useEffect(() => {
+    const handleExpiredSession = () => {
+      clearStoredToken();
+      setUser(null);
+      setLoading(false);
+    };
+
+    window.addEventListener('stockiq:auth-expired', handleExpiredSession);
+    return () => window.removeEventListener('stockiq:auth-expired', handleExpiredSession);
+  }, []);
+
   const login = useCallback(async (input: LoginInput) => {
     const payload = await authService.login(input);
-    localStorage.setItem('finora_token', payload.token);
+    setStoredToken(payload.token);
     setUser(payload.user);
-    toast.success('Welcome back to FINORA');
+    toast.success('Welcome back to StockIQ');
   }, []);
 
   const register = useCallback(async (input: RegisterInput) => {
     const payload = await authService.register(input);
-    localStorage.setItem('finora_token', payload.token);
+    setStoredToken(payload.token);
     setUser(payload.user);
-    toast.success('Your FINORA account is ready');
+    toast.success('Your StockIQ account is ready');
   }, []);
 
   const logout = useCallback(async () => {
     await authService.logout();
-    localStorage.removeItem('finora_token');
+    clearStoredToken();
     setUser(null);
     toast.success('Signed out securely');
   }, []);

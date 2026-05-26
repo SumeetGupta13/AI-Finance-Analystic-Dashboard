@@ -80,7 +80,7 @@ export default function MarketsPage() {
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.28em] text-emerald-300">Markets</p>
           <h1 className="mt-3 text-4xl font-semibold">Market discovery</h1>
-          <p className="mt-2 text-white/56">Search and compare equities, digital assets, and mutual funds from FINORA's normalized market layer.</p>
+          <p className="mt-2 text-white/56">Search and compare equities, digital assets, and mutual funds from StockIQ's normalized market layer.</p>
         </div>
         <Tabs tabs={tabs} value={activeTab} onChange={(value) => setActiveTab(value as MarketTab)} />
       </div>

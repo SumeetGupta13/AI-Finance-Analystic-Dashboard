@@ -119,7 +119,7 @@ export default function AssetDetailPage() {
       <Card>
         <CardContent>
           <h1 className="text-2xl font-semibold">Asset not found</h1>
-          <p className="mt-2 text-white/56">FINORA could not find this symbol in the current market universe.</p>
+          <p className="mt-2 text-white/56">StockIQ could not find this symbol in the current market universe.</p>
         </CardContent>
       </Card>
     );
@@ -185,7 +185,7 @@ export default function AssetDetailPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Trade simulator</CardTitle>
+            <CardTitle>Trade ticket</CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleTrade} className="space-y-4">
@@ -225,7 +225,7 @@ export default function AssetDetailPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Candlestick simulation</CardTitle>
+          <CardTitle>Historical OHLC</CardTitle>
         </CardHeader>
         <CardContent className="overflow-x-auto">
           <table className="w-full min-w-[720px] text-left text-sm">

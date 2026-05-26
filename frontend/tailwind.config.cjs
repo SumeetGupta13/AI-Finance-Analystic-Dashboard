@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        finora: {
+        stockiq: {
           900: '#0A0A0A',
           800: '#111111',
           indigo: '#5B46FF',

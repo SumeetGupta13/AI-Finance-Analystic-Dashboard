@@ -1,10 +1,10 @@
 {
-  "name": "finora-frontend",
+  "name": "stockiq-frontend",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "node scripts/dev-server.mjs",
     "build": "vite build",
     "preview": "vite preview"
   },

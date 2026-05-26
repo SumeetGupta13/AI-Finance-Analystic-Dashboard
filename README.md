@@ -1,14 +1,14 @@
-# FINORA
+# StockIQ
 
-FINORA is a premium MERN fintech investment platform with virtual trading, portfolio analytics, market discovery, watchlists, financial news, and a mock-first market service that is ready for future live API providers.
+StockIQ is a premium MERN fintech market intelligence platform with virtual trading, portfolio analytics, market discovery, watchlists, financial news, AI insights, sentiment analysis, and a mock-first market service that is ready for future live API providers.
 
 ## Tech Stack
 
 Frontend: React 18, Vite, TypeScript, Tailwind CSS, Framer Motion, Axios, React Router DOM v6, Recharts, Lucide React, React Hot Toast, Context API.
 
-Backend: Node.js, Express, MongoDB Atlas, Mongoose, JWT, bcryptjs, dotenv, cors, helmet, morgan, express-rate-limit, cookie-parser.
+Backend: Node.js, Express, local MongoDB, Mongoose, JWT, bcryptjs, dotenv, cors, helmet, morgan, express-rate-limit, cookie-parser.
 
-Deployment: Vercel frontend, Render backend, MongoDB Atlas database.
+Deployment: Vercel frontend, Render backend, and a MongoDB connection string for the target environment.
 
 ## Project Structure
 
@@ -69,19 +69,21 @@ npm run dev:frontend
 
 Frontend runs at `http://localhost:5173`. Backend runs at `http://localhost:5000`.
 
-## MongoDB Atlas Setup
+## Local MongoDB Setup
 
-1. Create an Atlas cluster.
-2. Create a database user.
-3. Add your IP address to Network Access.
-4. Copy the connection string.
-5. Set `MONGODB_URI` in `backend/.env`.
+1. Install MongoDB Community Server locally.
+2. Start the local MongoDB service.
+3. Keep this value in `backend/.env`:
 
-The backend also accepts the older `MONGO_URI` key for local compatibility.
+```text
+MONGODB_URI=mongodb://127.0.0.1:27017/stockiq
+```
+
+The backend also accepts the older `MONGO_URI` key for compatibility.
 
 ## Market Data Mode
 
-FINORA starts in mock mode:
+StockIQ starts in mock mode:
 
 ```text
 USE_MOCK_DATA=true

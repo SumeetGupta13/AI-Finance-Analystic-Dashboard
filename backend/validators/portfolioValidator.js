@@ -19,6 +19,13 @@ const holdingIdValidator = param('holdingId').isMongoId().withMessage('A valid h
 
 const addHoldingValidator = [assetTypeValidator, symbolValidator, quantityValidator, validateRequest];
 
+const tradeValidator = [
+  body('assetType').optional().isIn(['stock', 'crypto', 'mutual_fund']).withMessage('Asset type must be stock, crypto, or mutual_fund'),
+  symbolValidator,
+  quantityValidator,
+  validateRequest,
+];
+
 const updateHoldingValidator = [
   holdingIdValidator,
   body('quantity').optional().isFloat({ min: 0 }).withMessage('Quantity cannot be negative').toFloat(),
@@ -28,4 +35,4 @@ const updateHoldingValidator = [
 
 const removeHoldingValidator = [holdingIdValidator, validateRequest];
 
-module.exports = { addHoldingValidator, updateHoldingValidator, removeHoldingValidator };
+module.exports = { addHoldingValidator, updateHoldingValidator, removeHoldingValidator, tradeValidator };

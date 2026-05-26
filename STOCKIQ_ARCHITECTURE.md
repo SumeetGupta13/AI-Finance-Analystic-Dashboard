@@ -1,6 +1,6 @@
-# FINORA Architecture
+# StockIQ Architecture
 
-FINORA is a premium MERN fintech investment platform designed for virtual investing, portfolio analytics, market discovery, watchlists, and financial news. The initial release runs entirely on realistic mock market data through a provider-ready abstraction layer. Live providers can be enabled later by adding API keys and setting `USE_MOCK_DATA=false`.
+StockIQ is a premium MERN fintech market intelligence platform designed for virtual investing, portfolio analytics, market discovery, watchlists, AI insights, sentiment analysis, and financial news. The initial release runs entirely on realistic mock market data through a provider-ready abstraction layer. Live providers can be enabled later by adding API keys and setting `USE_MOCK_DATA=false`.
 
 ## Step 1 Scope
 
@@ -8,17 +8,17 @@ This step establishes the production architecture before feature implementation:
 
 - Root project split into `frontend/` and `backend/`
 - React 18, Vite, TypeScript, Tailwind CSS frontend structure
-- Node.js, Express, MongoDB Atlas, Mongoose backend MVC structure
+- Node.js, Express, local MongoDB, Mongoose backend MVC structure
 - Mock-first market data abstraction on frontend and backend
 - Database schema plan for authentication, portfolio, holdings, transactions, and watchlists
 - API route plan for auth, market data, virtual trading, portfolio analytics, and settings
-- Deployment plan for Vercel, Render, and MongoDB Atlas
+- Deployment plan for Vercel, Render, and environment-specific MongoDB connections
 - Environment variable plan for local, staging, and production
 
 ## Root Structure
 
 ```text
-FINORA/
+StockIQ/
   frontend/
     src/
       api/
@@ -84,7 +84,7 @@ The frontend never imports mock JSON directly. It consumes market data through `
 
 ## Backend Architecture
 
-The backend is a Node.js + Express API using MongoDB Atlas via Mongoose. It follows MVC with service and validation layers.
+The backend is a Node.js + Express API using local MongoDB via Mongoose in development. It follows MVC with service and validation layers.
 
 Primary responsibilities:
 
@@ -106,7 +106,7 @@ Route -> Middleware -> Validator -> Controller -> Service -> Model/Data Provider
 
 ## Market Service Architecture
 
-FINORA uses mock data on day one and a provider-ready live mode later.
+StockIQ uses mock data on day one and a provider-ready live mode later.
 
 Backend:
 
@@ -142,7 +142,7 @@ Provider-ready live adapters:
 - CoinGecko for crypto markets
 - NewsAPI for financial headlines
 
-The first implementation will expose stable FINORA response contracts independent of provider-specific payloads.
+The first implementation will expose stable StockIQ response contracts independent of provider-specific payloads.
 
 ## Database Schema Plan
 
@@ -276,10 +276,9 @@ Backend deployment:
 
 Database:
 
-- Target: MongoDB Atlas
-- Use a dedicated database user with least privilege
-- Allow Render outbound IPs or use Atlas network access configuration appropriate for deployment
-- Store connection string in Render environment variables
+- Target: local MongoDB in development
+- Use an environment-specific MongoDB URI when deploying outside the local machine
+- Store the connection string in backend environment variables
 
 ## Environment Variable Plan
 
@@ -288,7 +287,7 @@ Backend `.env`:
 ```text
 NODE_ENV=development
 PORT=5000
-MONGODB_URI=mongodb+srv://user:password@cluster.mongodb.net/finora
+MONGODB_URI=mongodb://127.0.0.1:27017/stockiq
 JWT_SECRET=replace-with-strong-secret
 JWT_EXPIRES_IN=7d
 JWT_COOKIE_EXPIRES_IN=7
@@ -305,7 +304,7 @@ NEWS_API_KEY=
 Frontend `.env`:
 
 ```text
-VITE_APP_NAME=FINORA
+VITE_APP_NAME=StockIQ
 VITE_API_BASE_URL=http://localhost:5000/api
 VITE_USE_MOCK_DATA=true
 ```

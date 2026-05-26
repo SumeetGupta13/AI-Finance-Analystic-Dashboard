@@ -17,6 +17,17 @@
     { "sector": "Crypto", "changePercent": 0.54 },
     { "sector": "Mutual Funds", "changePercent": 0.28 }
   ],
+  "trendSignals": [
+    { "symbol": "NVDA", "volumeChange": 19, "priceMomentum": 18, "newsImpact": 20, "socialBuzz": 18, "watchlistGrowth": 17 },
+    { "symbol": "BTC", "volumeChange": 17, "priceMomentum": 16, "newsImpact": 17, "socialBuzz": 19, "watchlistGrowth": 14 },
+    { "symbol": "RELIANCE", "volumeChange": 15, "priceMomentum": 13, "newsImpact": 15, "socialBuzz": 10, "watchlistGrowth": 12 },
+    { "symbol": "HDFCBANK", "volumeChange": 14, "priceMomentum": 12, "newsImpact": 14, "socialBuzz": 9, "watchlistGrowth": 11 },
+    { "symbol": "ICICIBANK", "volumeChange": 16, "priceMomentum": 14, "newsImpact": 13, "socialBuzz": 8, "watchlistGrowth": 10 },
+    { "symbol": "TCS", "volumeChange": 7, "priceMomentum": -8, "newsImpact": -11, "socialBuzz": 5, "watchlistGrowth": 4 },
+    { "symbol": "MSFT", "volumeChange": 9, "priceMomentum": 3, "newsImpact": 2, "socialBuzz": 7, "watchlistGrowth": 8 },
+    { "symbol": "SOL", "volumeChange": 12, "priceMomentum": -13, "newsImpact": -9, "socialBuzz": 11, "watchlistGrowth": 5 },
+    { "symbol": "PARAG_FLEXI", "volumeChange": 11, "priceMomentum": 7, "newsImpact": 8, "socialBuzz": 4, "watchlistGrowth": 9 }
+  ],
   "marketMood": {
     "score": 72,
     "label": "Risk-on",

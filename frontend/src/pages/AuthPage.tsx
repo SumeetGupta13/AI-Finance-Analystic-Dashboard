@@ -36,7 +36,7 @@ export default function AuthPage({ mode }: AuthPageProps) {
     <div className="flex min-h-screen items-center justify-center bg-[#0A0A0A] px-4 text-white">
       <form onSubmit={handleSubmit} className="w-full max-w-md rounded-lg border border-white/10 bg-white/[0.06] p-6 shadow-2xl backdrop-blur">
         <div className="mb-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-emerald-300">FINORA</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-emerald-300">StockIQ</p>
           <h1 className="mt-3 text-3xl font-semibold">{isRegister ? 'Create your account' : 'Welcome back'}</h1>
           <p className="mt-2 text-sm text-white/60">Secure access to your premium investing workspace.</p>
         </div>
@@ -80,12 +80,12 @@ export default function AuthPage({ mode }: AuthPageProps) {
           disabled={submitting}
           className="w-full rounded-md bg-emerald-300 px-4 py-3 font-semibold text-black transition hover:bg-emerald-200 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {submitting ? 'Securing session...' : isRegister ? 'Create FINORA account' : 'Sign in'}
+          {submitting ? 'Securing session...' : isRegister ? 'Create StockIQ account' : 'Sign in'}
         </button>
 
         <p className="mt-6 text-center text-sm text-white/60">
-          {isRegister ? 'Already have an account?' : 'New to FINORA?'}{' '}
-          <Link className="font-medium text-emerald-300" to={isRegister ? '/login' : '/register'}>
+          {isRegister ? 'Already have an account?' : 'New to StockIQ?'}{' '}
+          <Link className="font-medium text-emerald-300" to={isRegister ? '/login' : '/signup'}>
             {isRegister ? 'Sign in' : 'Create account'}
           </Link>
         </p>

@@ -1,4 +1,5 @@
 import { Bell, LogOut, Search } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import Button from '../ui/Button';
 
@@ -16,10 +17,10 @@ export default function Navbar() {
           <button className="flex size-10 items-center justify-center rounded-md border border-white/10 bg-white/[0.05] text-white/70 transition hover:text-white">
             <Bell size={18} />
           </button>
-          <div className="hidden text-right sm:block">
+          <Link to="/profile" className="hidden rounded-md px-2 py-1 text-right transition hover:bg-white/[0.05] sm:block">
             <p className="text-sm font-semibold text-white">{user?.name || 'Investor'}</p>
             <p className="text-xs text-white/48">{user?.preferences.currency || 'INR'} workspace</p>
-          </div>
+          </Link>
           <Button variant="ghost" className="size-10 px-0" onClick={() => void logout()} aria-label="Sign out">
             <LogOut size={18} />
           </Button>

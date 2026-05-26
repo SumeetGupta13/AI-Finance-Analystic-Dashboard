@@ -1,4 +1,4 @@
-# FINORA API Plan
+# StockIQ API Plan
 
 All API responses use a consistent JSON contract:
 
@@ -37,6 +37,9 @@ Errors use:
 | GET | `/api/market/losers` | Top losers |
 | GET | `/api/market/history/:symbol` | Historical prices by symbol and range |
 | GET | `/api/market/news` | Financial news |
+| GET | `/api/market/trends` | Trend score engine output, bullish/bearish assets, hot stocks, market momentum |
+| GET | `/api/market/sentiment` | News sentiment analysis with confidence and positive/negative/neutral summaries |
+| GET | `/api/market/ai-insights` | AI summaries, recommendations, risk alerts, market opportunities, portfolio suggestions |
 
 ## Protected Routes
 

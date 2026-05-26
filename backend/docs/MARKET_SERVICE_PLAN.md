@@ -1,4 +1,4 @@
-# FINORA Market Service Plan
+# StockIQ Market Service Plan
 
 The market service is the only backend layer allowed to know whether data comes from mock JSON or a live provider.
 
@@ -23,13 +23,13 @@ Mock mode:
 
 - Enabled with `USE_MOCK_DATA=true`
 - Reads from `backend/data/*.json`
-- Returns realistic normalized FINORA payloads
+- Returns realistic normalized StockIQ payloads
 
 Live mode:
 
 - Enabled with `USE_MOCK_DATA=false`
 - Reads provider keys from environment variables
-- Normalizes provider payloads into the same FINORA response shape
+- Normalizes provider payloads into the same StockIQ response shape
 
 ## Provider Targets
 

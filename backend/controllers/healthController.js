@@ -7,8 +7,8 @@ const getHealth = asyncHandler(async (req, res) => {
   const databaseState = mongoose.connection.readyState;
   const databaseStatus = ['disconnected', 'connected', 'connecting', 'disconnecting'][databaseState] || 'unknown';
 
-  return sendSuccess(res, 200, 'FINORA API is healthy', {
-    service: 'finora-backend',
+  return sendSuccess(res, 200, `${env.appName} API is healthy`, {
+    service: 'stockiq-backend',
     environment: env.nodeEnv,
     marketDataMode: env.useMockData ? 'mock' : 'live',
     database: databaseStatus,

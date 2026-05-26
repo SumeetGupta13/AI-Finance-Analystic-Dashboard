@@ -1,0 +1,100 @@
+{
+  "dailyMarketOverview": {
+    "title": "Daily market overview",
+    "summary": "Market breadth is constructive, led by financials, energy, AI infrastructure, and large-cap crypto. Momentum is positive but concentrated, so position sizing should remain disciplined.",
+    "riskScore": "Medium",
+    "marketMood": "Risk-on",
+    "generatedAt": "2026-05-25T08:45:00.000Z"
+  },
+  "marketSummaries": [
+    {
+      "id": "summary_001",
+      "title": "Energy sector is trending upward",
+      "summary": "Energy leadership improved as crude cooled and institutional flows returned to large-cap integrated energy names.",
+      "symbols": ["RELIANCE"],
+      "category": "market",
+      "recommendation": "Buy",
+      "confidence": 0.78
+    },
+    {
+      "id": "summary_002",
+      "title": "AI infrastructure remains the strongest global theme",
+      "summary": "Semiconductor demand continues to support premium multiples for AI infrastructure leaders.",
+      "symbols": ["NVDA"],
+      "category": "opportunity",
+      "recommendation": "Strong Buy",
+      "confidence": 0.9
+    }
+  ],
+  "recommendations": [
+    {
+      "symbol": "NVDA",
+      "rating": "Strong Buy",
+      "confidence": 0.93,
+      "reason": "Data-center revenue momentum, strong news sentiment, and high trend score indicate durable leadership."
+    },
+    {
+      "symbol": "HDFCBANK",
+      "rating": "Buy",
+      "confidence": 0.81,
+      "reason": "Improving bank-sector breadth and stable asset-quality signals support accumulation."
+    },
+    {
+      "symbol": "TCS",
+      "rating": "Hold",
+      "confidence": 0.68,
+      "reason": "High-quality franchise, but near-term price momentum and discretionary IT demand remain muted."
+    },
+    {
+      "symbol": "SOL",
+      "rating": "Sell",
+      "confidence": 0.71,
+      "reason": "Weak relative momentum and negative sentiment make risk-reward less attractive."
+    }
+  ],
+  "riskAlerts": [
+    {
+      "id": "risk_001",
+      "message": "Your portfolio has high tech exposure",
+      "severity": "medium",
+      "reason": "Technology and AI-linked assets are leading returns but increase drawdown risk if momentum reverses."
+    },
+    {
+      "id": "risk_002",
+      "message": "Crypto volatility remains elevated",
+      "severity": "medium",
+      "reason": "BTC trend is positive, but derivative positioning can amplify short-term swings."
+    }
+  ],
+  "marketOpportunities": [
+    {
+      "id": "opp_001",
+      "message": "Energy sector is trending upward",
+      "symbols": ["RELIANCE"],
+      "rating": "Buy",
+      "reason": "Volume expansion and constructive news impact support follow-through."
+    },
+    {
+      "id": "opp_002",
+      "message": "Private banks show improving market leadership",
+      "symbols": ["HDFCBANK", "ICICIBANK"],
+      "rating": "Buy",
+      "reason": "Financial Services is one of the strongest sector momentum clusters."
+    }
+  ],
+  "investmentSuggestions": [
+    "Diversification suggested",
+    "Keep position sizes balanced while momentum is concentrated in technology and financials",
+    "Prefer assets with positive sentiment and trend scores above 70"
+  ],
+  "portfolioSuggestions": [
+    {
+      "message": "Diversification suggested",
+      "action": "Add exposure outside technology and crypto if portfolio concentration rises above 45%."
+    },
+    {
+      "message": "Risk score: Medium",
+      "action": "Use staggered entries and avoid chasing assets after large single-day moves."
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+[
+  {
+    "symbol": "TSLA",
+    "assetType": "stock",
+    "sentiment": "Positive",
+    "label": "bullish",
+    "score": 0.82,
+    "confidence": 91,
+    "reason": "Strong earnings growth and positive market outlook improved institutional confidence.",
+    "newsImpact": 18,
+    "positiveNews": [
+      "Delivery margins improved after operating cost reductions.",
+      "Analysts raised near-term earnings expectations after stronger guidance."
+    ],
+    "negativeNews": [
+      "Valuation remains sensitive to rate expectations."
+    ],
+    "neutralNews": [
+      "Management maintained capital expenditure plans."
+    ],
+    "updatedAt": "2026-05-25T08:00:00.000Z"
+  },
+  {
+    "symbol": "NVDA",
+    "assetType": "stock",
+    "sentiment": "Positive",
+    "label": "bullish",
+    "score": 0.88,
+    "confidence": 94,
+    "reason": "AI infrastructure demand, resilient data-center spend, and upbeat semiconductor guidance support momentum.",
+    "newsImpact": 20,
+    "positiveNews": [
+      "Cloud providers continue expanding AI accelerator budgets.",
+      "Forward guidance remains above market expectations."
+    ],
+    "negativeNews": [
+      "Export controls remain a headline risk."
+    ],
+    "neutralNews": [
+      "Investors are waiting for the next earnings print."
+    ],
+    "updatedAt": "2026-05-25T08:05:00.000Z"
+  },
+  {
+    "symbol": "RELIANCE",
+    "assetType": "stock",
+    "sentiment": "Positive",
+    "label": "bullish",
+    "score": 0.63,
+    "confidence": 84,
+    "reason": "Energy margins and retail execution remain supportive while softer crude improves broader market sentiment.",
+    "newsImpact": 15,
+    "positiveNews": [
+      "Institutional buying improved in energy majors.",
+      "Retail and telecom businesses continue to support consolidated earnings."
+    ],
+    "negativeNews": [
+      "Refining spreads can remain volatile."
+    ],
+    "neutralNews": [
+      "The stock is trading near its recent range high."
+    ],
+    "updatedAt": "2026-05-25T08:10:00.000Z"
+  },
+  {
+    "symbol": "HDFCBANK",
+    "assetType": "stock",
+    "sentiment": "Positive",
+    "label": "bullish",
+    "score": 0.56,
+    "confidence": 81,
+    "reason": "Credit growth, stable asset quality, and renewed private-bank inflows support constructive sentiment.",
+    "newsImpact": 14,
+    "positiveNews": [
+      "Private banks led institutional buying in the latest session.",
+      "Deposit growth trends stabilized versus prior quarters."
+    ],
+    "negativeNews": [
+      "Margin normalization remains gradual."
+    ],
+    "neutralNews": [
+      "The market is monitoring merger synergy delivery."
+    ],
+    "updatedAt": "2026-05-25T08:15:00.000Z"
+  },
+  {
+    "symbol": "TCS",
+    "assetType": "stock",
+    "sentiment": "Negative",
+    "label": "bearish",
+    "score": -0.42,
+    "confidence": 76,
+    "reason": "Soft discretionary technology spending and weak price momentum keep near-term sentiment cautious.",
+    "newsImpact": -11,
+    "positiveNews": [
+      "Long-term outsourcing demand remains intact."
+    ],
+    "negativeNews": [
+      "Enterprise technology budgets remain selective.",
+      "Recent price action trails broader IT peers."
+    ],
+    "neutralNews": [
+      "Management commentary is expected to clarify demand visibility."
+    ],
+    "updatedAt": "2026-05-25T08:20:00.000Z"
+  },
+  {
+    "symbol": "BTC",
+    "assetType": "crypto",
+    "sentiment": "Positive",
+    "label": "bullish",
+    "score": 0.71,
+    "confidence": 88,
+    "reason": "ETF flows remain steady while spot demand holds above key psychological levels.",
+    "newsImpact": 17,
+    "positiveNews": [
+      "ETF inflows remain supportive.",
+      "Price continues to hold above 109000 dollars."
+    ],
+    "negativeNews": [
+      "Derivatives positioning is moderately crowded."
+    ],
+    "neutralNews": [
+      "Macro liquidity remains the main near-term driver."
+    ],
+    "updatedAt": "2026-05-25T08:25:00.000Z"
+  },
+  {
+    "symbol": "SOL",
+    "assetType": "crypto",
+    "sentiment": "Negative",
+    "label": "bearish",
+    "score": -0.38,
+    "confidence": 73,
+    "reason": "Short-term risk appetite weakened after elevated volatility and lower relative strength.",
+    "newsImpact": -9,
+    "positiveNews": [
+      "Developer activity remains healthy."
+    ],
+    "negativeNews": [
+      "Price momentum weakened versus major crypto assets.",
+      "Volatility remains elevated."
+    ],
+    "neutralNews": [
+      "Network activity is stable."
+    ],
+    "updatedAt": "2026-05-25T08:30:00.000Z"
+  }
+]

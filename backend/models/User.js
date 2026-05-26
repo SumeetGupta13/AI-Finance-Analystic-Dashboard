@@ -21,9 +21,23 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: [true, 'Password is required'],
+      required() {
+        return this.authProvider === 'local';
+      },
       minlength: [8, 'Password must be at least 8 characters'],
       select: false,
+    },
+    googleId: {
+      type: String,
+      default: '',
+      trim: true,
+      index: true,
+      sparse: true,
+    },
+    authProvider: {
+      type: String,
+      enum: ['local', 'google'],
+      default: 'local',
     },
     avatar: {
       type: String,
@@ -71,7 +85,7 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.pre('save', async function hashPassword(next) {
-  if (!this.isModified('password')) {
+  if (!this.password || !this.isModified('password')) {
     return next();
   }
 

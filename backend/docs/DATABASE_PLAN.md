@@ -1,6 +1,6 @@
-# FINORA Database Plan
+# StockIQ Database Plan
 
-MongoDB Atlas stores user-owned data. Market data starts as static mock JSON and is later replaceable by live provider adapters.
+Local MongoDB stores user-owned data in development. Market data starts as static mock JSON and is later replaceable by live provider adapters.
 
 ## Collections
 

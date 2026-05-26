@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { Settings, User } from 'lucide-react';
+import { Bell, Moon, Settings, ShieldCheck, User } from 'lucide-react';
 import Button from '../components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
 import { useAuth } from '../context/AuthContext';
@@ -13,6 +13,12 @@ export default function SettingsPage() {
   const [currency, setCurrency] = useState<'INR' | 'USD'>(user?.preferences.currency || 'INR');
   const [defaultMarket, setDefaultMarket] = useState<'IN' | 'US' | 'GLOBAL'>(user?.preferences.defaultMarket || 'IN');
   const [riskProfile, setRiskProfile] = useState<'conservative' | 'balanced' | 'aggressive'>(user?.preferences.riskProfile || 'balanced');
+  const [priceAlerts, setPriceAlerts] = useState(() => localStorage.getItem('stockiq_price_alerts') !== 'false');
+  const [newsDigest, setNewsDigest] = useState(() => localStorage.getItem('stockiq_news_digest') !== 'false');
+  const [riskAlerts, setRiskAlerts] = useState(() => localStorage.getItem('stockiq_risk_alerts') !== 'false');
+  const [highContrastCharts, setHighContrastCharts] = useState(() => localStorage.getItem('stockiq_high_contrast_charts') === 'true');
+  const [sessionAlerts, setSessionAlerts] = useState(() => localStorage.getItem('stockiq_session_alerts') !== 'false');
+  const [orderConfirmation, setOrderConfirmation] = useState(() => localStorage.getItem('stockiq_order_confirmation') !== 'false');
   const [savingProfile, setSavingProfile] = useState(false);
   const [savingPreferences, setSavingPreferences] = useState(false);
 
@@ -48,6 +54,16 @@ export default function SettingsPage() {
     } finally {
       setSavingPreferences(false);
     }
+  };
+
+  const saveWorkspaceSettings = () => {
+    localStorage.setItem('stockiq_price_alerts', String(priceAlerts));
+    localStorage.setItem('stockiq_news_digest', String(newsDigest));
+    localStorage.setItem('stockiq_risk_alerts', String(riskAlerts));
+    localStorage.setItem('stockiq_high_contrast_charts', String(highContrastCharts));
+    localStorage.setItem('stockiq_session_alerts', String(sessionAlerts));
+    localStorage.setItem('stockiq_order_confirmation', String(orderConfirmation));
+    toast.success('Workspace settings saved');
   };
 
   return (
@@ -142,6 +158,84 @@ export default function SettingsPage() {
                 Save preferences
               </Button>
             </form>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="grid gap-4 xl:grid-cols-3">
+        <Card>
+          <CardHeader className="flex items-center justify-between">
+            <CardTitle>Notification settings</CardTitle>
+            <Bell size={18} className="text-emerald-300" />
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {[
+              ['Price alerts', priceAlerts, setPriceAlerts],
+              ['News digest', newsDigest, setNewsDigest],
+              ['Risk alerts', riskAlerts, setRiskAlerts],
+            ].map(([label, value, setter]) => (
+              <label key={String(label)} className="flex items-center justify-between rounded-md border border-white/10 bg-black/20 p-3 text-sm">
+                <span>{String(label)}</span>
+                <input
+                  type="checkbox"
+                  checked={Boolean(value)}
+                  onChange={(event) => (setter as (next: boolean) => void)(event.target.checked)}
+                  className="size-4 accent-emerald-300"
+                />
+              </label>
+            ))}
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex items-center justify-between">
+            <CardTitle>Theme settings</CardTitle>
+            <Moon size={18} className="text-indigo-200" />
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <div className="rounded-md border border-white/10 bg-black/20 p-3">
+              <p className="text-sm text-white/48">Theme</p>
+              <p className="mt-2 font-semibold capitalize">{user?.preferences.theme || 'dark'} premium</p>
+            </div>
+            <label className="flex items-center justify-between rounded-md border border-white/10 bg-black/20 p-3 text-sm">
+              <span>High contrast charts</span>
+              <input
+                type="checkbox"
+                checked={highContrastCharts}
+                onChange={(event) => setHighContrastCharts(event.target.checked)}
+                className="size-4 accent-emerald-300"
+              />
+            </label>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex items-center justify-between">
+            <CardTitle>Security settings</CardTitle>
+            <ShieldCheck size={18} className="text-emerald-300" />
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <label className="flex items-center justify-between rounded-md border border-white/10 bg-black/20 p-3 text-sm">
+              <span>Session alerts</span>
+              <input
+                type="checkbox"
+                checked={sessionAlerts}
+                onChange={(event) => setSessionAlerts(event.target.checked)}
+                className="size-4 accent-emerald-300"
+              />
+            </label>
+            <label className="flex items-center justify-between rounded-md border border-white/10 bg-black/20 p-3 text-sm">
+              <span>Order confirmation</span>
+              <input
+                type="checkbox"
+                checked={orderConfirmation}
+                onChange={(event) => setOrderConfirmation(event.target.checked)}
+                className="size-4 accent-emerald-300"
+              />
+            </label>
+            <Button type="button" variant="secondary" onClick={saveWorkspaceSettings} className="w-full">
+              Save workspace settings
+            </Button>
           </CardContent>
         </Card>
       </div>

@@ -1,13 +1,18 @@
-import { BarChart3, Briefcase, Newspaper, Settings, Star, TrendingUp } from 'lucide-react';
+import { Activity, BarChart3, Bitcoin, BrainCircuit, Briefcase, Newspaper, Settings, Star, TrendingUp, User } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { cn } from '../../utils/cn';
 
 const navItems = [
   { label: 'Dashboard', href: '/dashboard', icon: BarChart3 },
   { label: 'Markets', href: '/markets', icon: TrendingUp },
+  { label: 'Crypto', href: '/crypto', icon: Bitcoin },
   { label: 'Portfolio', href: '/portfolio', icon: Briefcase },
+  { label: 'Transactions', href: '/transactions', icon: Activity },
+  { label: 'Monthly', href: '/monthly-analytics', icon: BarChart3 },
   { label: 'Watchlist', href: '/watchlist', icon: Star },
   { label: 'News', href: '/news', icon: Newspaper },
+  { label: 'AI Insights', href: '/ai-insights', icon: BrainCircuit },
+  { label: 'Profile', href: '/profile', icon: User },
   { label: 'Settings', href: '/settings', icon: Settings },
 ];
 
@@ -19,7 +24,7 @@ export default function Sidebar() {
           <TrendingUp size={21} />
         </div>
         <div>
-          <p className="text-lg font-semibold text-white">FINORA</p>
+          <p className="text-lg font-semibold text-white">StockIQ</p>
           <p className="text-xs uppercase tracking-[0.24em] text-white/42">Capital OS</p>
         </div>
       </NavLink>

@@ -5,36 +5,32 @@ const APP_BASE = 'http://localhost:5173';
 
 test.setTimeout(120000);
 
-test('news sentiment flow (login + search results)', async ({ page, request }) => {
+test('news flow (login + sentiment badges)', async ({ page, request }) => {
   const email = `e2e${Date.now()}@example.com`;
   const reg = await request.post(`${API_BASE}/auth/register`, {
     data: { name: 'E2E News User', email, password: 'Password123!' },
   });
   expect(reg.status()).toBe(201);
 
-  const rawSetCookie = reg.headers()['set-cookie'];
-  expect(rawSetCookie).toBeTruthy();
-  const match = rawSetCookie.match(/jwt=([^;]+)/);
-  expect(match).toBeTruthy();
-  const token = match[1];
+  const regBody = await reg.json();
+  const token = regBody.data.token;
+  expect(token).toBeTruthy();
 
-  await page.context().addCookies([{ name: 'jwt', value: token, domain: 'localhost', path: '/' }]);
-  await page.goto(`${APP_BASE}/news-sentiment`, { waitUntil: 'networkidle' });
+  await page.addInitScript((authToken) => {
+    window.localStorage.setItem('stockiq_token', authToken);
+  }, token);
+  await page.context().addCookies([{ name: 'token', value: token, domain: 'localhost', path: '/' }]);
 
-  await expect(page.locator('text=News Sentiment').first()).toBeVisible({ timeout: 20000 });
-  await expect(page.getByPlaceholder('Search symbol, e.g. AAPL')).toBeVisible({ timeout: 10000 });
+  await page.goto(`${APP_BASE}/news`, { waitUntil: 'networkidle' });
 
-  await page.fill('input[placeholder="Search symbol, e.g. AAPL"]', 'AAPL');
-  await page.click('button:has-text("Search")');
-
-  await expect(page.locator('text=AAPL').first()).toBeVisible({ timeout: 10000 });
-  await expect(page.getByText('Sentiment Meter')).toBeVisible({ timeout: 10000 });
+  await expect(page.getByRole('heading', { name: 'Market intelligence' })).toBeVisible({ timeout: 20000 });
+  await expect(page.locator('text=positive').first()).toBeVisible({ timeout: 10000 });
 
   const profileStatus = await page.evaluate((url) =>
     fetch(url, { credentials: 'include' })
-      .then((r) => r.status)
-      .catch((e) => `ERROR:${e.message}`),
-    'http://localhost:5000/api/auth/profile'
+      .then((response) => response.status)
+      .catch((error) => `ERROR:${error.message}`),
+    `${API_BASE}/auth/profile`
   );
-  console.log('browser http://localhost:5000/api/auth/profile status ->', profileStatus);
+  expect(profileStatus).toBe(200);
 });

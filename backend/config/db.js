@@ -7,7 +7,7 @@ const connectDB = async () => {
       throw new Error('MONGODB_URI is required in production');
     }
 
-    console.warn('MONGODB_URI is not set. Database-backed routes will require a MongoDB Atlas connection.');
+    console.warn('MONGODB_URI is not set. Database-backed routes need a local MongoDB connection.');
     return null;
   }
 
@@ -27,7 +27,7 @@ const connectDB = async () => {
     }
 
     console.warn(`MongoDB connection unavailable: ${error.message}`);
-    console.warn('FINORA API started without database access. Configure MONGODB_URI for auth, portfolio, trading, watchlists, and settings.');
+    console.warn(`${env.appName} API started without database access. Start local MongoDB or update MONGODB_URI for auth, portfolio, trading, watchlists, and settings.`);
     return null;
   }
 };

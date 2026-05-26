@@ -7,8 +7,16 @@ const validateRequest = (req, res, next) => {
     return next();
   }
 
+  const errors = result.array().map((error) => ({
+    field: error.path || error.param,
+    message: error.msg,
+  }));
+  const error = new Error(errors.map((item) => item.message).join(', '));
+  error.statusCode = 422;
+  error.errors = errors;
+
   res.status(422);
-  return next(new Error(result.array().map((error) => error.msg).join(', ')));
+  return next(error);
 };
 
 module.exports = validateRequest;

@@ -9,8 +9,20 @@ import Tabs from '../components/ui/Tabs';
 import { marketService } from '../services/marketService';
 import { portfolioService } from '../services/portfolioService';
 import { transactionService } from '../services/transactionService';
-import type { AssetType, MarketAsset, PortfolioAnalytics, Transaction } from '../types/domain';
-import { formatCurrency, formatPercent } from '../utils/formatters';
+import type { AssetType, MarketAsset, MutualFund, PortfolioAnalytics, Transaction } from '../types/domain';
+import { getTransactionAmount, getTransactionId, getTransactionSymbol } from '../utils/analytics';
+import { formatCurrency, formatPercent, getAssetCurrency } from '../utils/formatters';
+
+const normalizeFund = (fund: MutualFund): MarketAsset => ({
+  ...fund,
+  price: fund.nav,
+  exchange: 'AMFI',
+  sector: fund.category,
+  industry: fund.risk,
+  previousClose: fund.nav / (1 + fund.changePercent / 100),
+  marketCap: fund.aum,
+  volume: undefined,
+});
 
 export default function PortfolioPage() {
   const [analytics, setAnalytics] = useState<PortfolioAnalytics | null>(null);
@@ -26,15 +38,16 @@ export default function PortfolioPage() {
   async function loadPortfolio() {
     setLoading(true);
     try {
-      const [analyticsData, transactionsData, stocksData, cryptoData] = await Promise.all([
+      const [analyticsData, transactionsData, stocksData, cryptoData, mutualFundsData] = await Promise.all([
         portfolioService.getAnalytics(),
         transactionService.list(),
         marketService.getStocks(),
         marketService.getCryptoMarkets(),
+        marketService.getMutualFunds(),
       ]);
       setAnalytics(analyticsData);
       setTransactions(transactionsData);
-      setAssets([...stocksData, ...cryptoData]);
+      setAssets([...stocksData, ...cryptoData, ...mutualFundsData.map(normalizeFund)]);
     } finally {
       setLoading(false);
     }
@@ -49,12 +62,12 @@ export default function PortfolioPage() {
     setSubmitting(true);
     try {
       const payload = { assetType, symbol: symbol.toUpperCase(), quantity: Number(quantity) };
-      if (side === 'buy') {
-        await transactionService.buy(payload);
-        toast.success('Buy order processed');
+      const result = side === 'buy' ? await portfolioService.buy(payload) : await portfolioService.sell(payload);
+
+      if (result.status === 'rejected') {
+        toast.error(result.reason || result.transaction.rejectionReason || `${side} order rejected`);
       } else {
-        await transactionService.sell(payload);
-        toast.success('Sell order processed');
+        toast.success(`${side === 'buy' ? 'Buy' : 'Sell'} order completed`);
       }
       await loadPortfolio();
     } finally {
@@ -79,9 +92,13 @@ export default function PortfolioPage() {
       <div className="grid gap-4 md:grid-cols-4">
         {[
           ['Portfolio value', formatCurrency(analytics?.summary.portfolioValue || 0), 'success'],
-          ['Cash balance', formatCurrency(analytics?.summary.cashBalance || 0), 'neutral'],
+          ['Wallet balance', formatCurrency(analytics?.summary.walletBalance || analytics?.summary.cashBalance || 0), 'neutral'],
           ['Invested', formatCurrency(analytics?.summary.investedValue || 0), 'indigo'],
-          ['P&L', `${formatCurrency(analytics?.summary.totalPnL || 0)} (${formatPercent(analytics?.summary.totalPnLPercent || 0)})`, (analytics?.summary.totalPnL || 0) >= 0 ? 'success' : 'danger'],
+          [
+            'P&L',
+            `${formatCurrency(analytics?.summary.totalPnL || 0)} (${formatPercent(analytics?.summary.totalPnLPercent || 0)})`,
+            (analytics?.summary.totalPnL || 0) >= 0 ? 'success' : 'danger',
+          ],
         ].map(([label, value, tone]) => (
           <Card key={label}>
             <CardContent>
@@ -183,12 +200,12 @@ export default function PortfolioPage() {
             </thead>
             <tbody className="divide-y divide-white/10">
               {transactions.map((transaction) => (
-                <tr key={transaction._id}>
-                  <td className="py-3 capitalize">{transaction.type}</td>
-                  <td className="py-3 font-semibold">{transaction.symbol}</td>
+                <tr key={getTransactionId(transaction)}>
+                  <td className="py-3 capitalize">{transaction.type.replace('_', ' ')}</td>
+                  <td className="py-3 font-semibold">{getTransactionSymbol(transaction)}</td>
                   <td className="py-3">{transaction.quantity}</td>
-                  <td className="py-3">{formatCurrency(transaction.price, transaction.assetType === 'stock' ? 'INR' : 'USD')}</td>
-                  <td className="py-3">{formatCurrency(transaction.netAmount, transaction.assetType === 'stock' ? 'INR' : 'USD')}</td>
+                  <td className="py-3">{formatCurrency(transaction.price, getAssetCurrency(transaction.assetType))}</td>
+                  <td className="py-3">{formatCurrency(getTransactionAmount(transaction), getAssetCurrency(transaction.assetType))}</td>
                   <td className="py-3">
                     <Badge tone={transaction.status === 'completed' ? 'success' : 'danger'}>{transaction.status}</Badge>
                   </td>

@@ -1,6 +1,16 @@
 import api from '../api/axios';
 import { endpoints } from '../api/endpoints';
-import type { ApiResponse, Candle, MarketAsset, MutualFund, NewsArticle } from '../types/domain';
+import { getCachedValue, setCachedValue } from '../utils/serviceCache';
+import type {
+  AIInsightPayload,
+  ApiResponse,
+  Candle,
+  MarketAsset,
+  MarketTrendOverview,
+  MutualFund,
+  NewsArticle,
+  SentimentAnalysis,
+} from '../types/domain';
 
 export const marketService = {
   async getStocks(params?: Record<string, string>) {
@@ -10,6 +20,28 @@ export const marketService = {
 
   async getStockBySymbol(symbol: string) {
     const response = await api.get<ApiResponse<MarketAsset>>(endpoints.market.stock(symbol));
+    return response.data.data;
+  },
+
+  async getStockQuote(symbol: string) {
+    const response = await api.get<ApiResponse<MarketAsset>>(endpoints.market.quote(symbol));
+    return response.data.data;
+  },
+
+  async getQuotes(symbols: string[]) {
+    const cacheKey = `stockiq_quotes_${symbols.map((symbol) => symbol.toUpperCase()).sort().join('_')}`;
+
+    try {
+      const response = await api.post<ApiResponse<MarketAsset[]>>(endpoints.market.quotes, { symbols });
+      setCachedValue(cacheKey, response.data.data);
+      return response.data.data;
+    } catch {
+      return getCachedValue<MarketAsset[]>(cacheKey) || [];
+    }
+  },
+
+  async getCompanyProfile(symbol: string) {
+    const response = await api.get<ApiResponse<Record<string, unknown>>>(endpoints.market.profile(symbol));
     return response.data.data;
   },
 
@@ -33,6 +65,11 @@ export const marketService = {
     return response.data.data;
   },
 
+  async getTrendingCrypto(limit = 10) {
+    const response = await api.get<ApiResponse<MarketAsset[]>>(endpoints.market.trendingCrypto, { params: { limit } });
+    return response.data.data;
+  },
+
   async getMutualFunds(params?: Record<string, string>) {
     const response = await api.get<ApiResponse<MutualFund[]>>(endpoints.market.mutualFunds, { params });
     return response.data.data;
@@ -52,7 +89,17 @@ export const marketService = {
   },
 
   async getMarketTrends() {
-    const response = await api.get<ApiResponse<unknown>>(endpoints.market.trends);
+    const response = await api.get<ApiResponse<MarketTrendOverview>>(endpoints.market.trends);
+    return response.data.data;
+  },
+
+  async getSentimentAnalysis(params?: Record<string, string>) {
+    const response = await api.get<ApiResponse<SentimentAnalysis[]>>(endpoints.market.sentiment, { params });
+    return response.data.data;
+  },
+
+  async getAIInsights(params?: Record<string, string>) {
+    const response = await api.get<ApiResponse<AIInsightPayload>>(endpoints.market.aiInsights, { params });
     return response.data.data;
   },
 };
